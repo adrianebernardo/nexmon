@@ -1,0 +1,60 @@
+CREATE DATABASE IF NOT EXISTS nexmon_db
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+USE nexmon_db;
+
+CREATE TABLE IF NOT EXISTS usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nome       VARCHAR(100) NOT NULL,
+    email      VARCHAR(100) NOT NULL UNIQUE,
+    senha      VARCHAR(255) NOT NULL,
+    endereco   VARCHAR(150),
+    cidade     VARCHAR(80)
+);
+
+CREATE TABLE IF NOT EXISTS produto (
+    id_produto INT AUTO_INCREMENT PRIMARY KEY,
+    titulo     VARCHAR(120) NOT NULL,
+    descricao  TEXT,
+    preco      DECIMAL(10,2) NOT NULL,
+    tamanho    VARCHAR(20),
+    tipo       ENUM('VENDA', 'ALUGUEL', 'EMPRESTIMO') NOT NULL,
+    categoria  VARCHAR(50),
+    cidade     VARCHAR(80),
+    imagem_url VARCHAR(255),
+    status     VARCHAR(30) DEFAULT 'DISPONIVEL',
+    id_usuario INT NOT NULL,
+    CONSTRAINT fk_produto_usuario
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    CONSTRAINT chk_produto_preco CHECK (preco >= 0),
+    INDEX idx_produto_tipo_categoria (tipo, categoria)
+);
+
+CREATE TABLE IF NOT EXISTS servico (
+    id_servico   INT AUTO_INCREMENT PRIMARY KEY,
+    nome_servico VARCHAR(120) NOT NULL,
+    descricao    TEXT,
+    categoria    VARCHAR(50) NOT NULL,
+    preco_base   DECIMAL(10,2),
+    cidade       VARCHAR(80),
+    imagem_url   VARCHAR(255),
+    id_usuario   INT NOT NULL,
+    CONSTRAINT fk_servico_usuario
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    CONSTRAINT chk_servico_preco CHECK (preco_base IS NULL OR preco_base >= 0)
+);
+
+CREATE TABLE IF NOT EXISTS reserva (
+    id_reserva  INT AUTO_INCREMENT PRIMARY KEY,
+    data_inicio DATE NOT NULL,
+    data_fim    DATE NOT NULL,
+    status      VARCHAR(30) DEFAULT 'PENDENTE',
+    id_produto  INT NOT NULL,
+    id_usuario  INT NOT NULL,
+    CONSTRAINT fk_reserva_produto
+        FOREIGN KEY (id_produto) REFERENCES produto(id_produto),
+    CONSTRAINT fk_reserva_usuario
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    CONSTRAINT chk_reserva_datas CHECK (data_fim >= data_inicio)
+);
