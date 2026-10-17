@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexmon — Marketplace Geek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container navbar__inner">
+      <a href="index.html" class="navbar__brand" aria-label="Nexmon — início">NEX<span>MON</span></a>
+      
+      <div class="navbar__search">
+        <label for="search" class="sr-only">Buscar produtos e serviços</label>
+        <input type="search" id="search" placeholder="Buscar relíquias, armaduras..." autocomplete="off">
+      </div>
+
+      <div class="navbar__actions">
+        <div class="navbar__city">
+          <label for="city-filter" class="sr-only">Filtrar por cidade</label>
+          <select id="city-filter">
+            <option value="">Todas as cidades</option>
+            <option value="Porto Alegre">Porto Alegre</option>
+            <option value="Canoas">Canoas</option>
+            <option value="São Leopoldo">São Leopoldo</option>
+            <option value="Novo Hamburgo">Novo Hamburgo</option>
+          </select>
+        </div>
+        
+        <!-- Botão de Login/Sair -->
+        <a href="login.html" class="btn btn--primary" id="nav-login-btn">Entrar</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Destaque da comunidade">
+      <div class="hero__content">
+        <span class="hero__eyebrow">⚔️ A Guilda Nexmon</span>
+        <h1>Encontre sua próxima relíquia.</h1>
+        <p class="muted">Alugue armaduras, compre colecionáveis e contrate artesãos do universo geek.</p>
+        <a href="#catalogo" class="btn btn--primary hero__cta">Explorar Catálogo</a>
+      </div>
+    </section>
+
+    <!-- FILTROS DE MODALIDADE -->
+    <section aria-label="Filtrar por modalidade">
+      <div class="filters" id="modality-filters" role="group" aria-label="Modalidades">
+        <button class="filter-chip is-active" data-modality="">Tudo</button>
+        <button class="filter-chip" data-modality="aluguel">Aluguel</button>
+        <button class="filter-chip" data-modality="venda">Venda</button>
+        <button class="filter-chip" data-modality="emprestimo">Empréstimo</button>
+        <button class="filter-chip" data-modality="servico">Serviço</button>
+      </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section id="catalogo" aria-label="Catálogo de anúncios">
+      <div class="section-title">
+        <h2>Produtos em destaque</h2>
+        <span class="muted" id="results-count">Carregando…</span>
+      </div>
+      <div class="product-grid" id="product-grid" aria-live="polite"></div>
+      <nav class="pagination" id="pagination" aria-label="Paginação do catálogo"></nav>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      © 2026 Nexmon — Projeto acadêmico APS. Feito com 💜 pela comunidade geek.
+    </div>
+  </footer>
+
+  <!-- TOASTS -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- SCRIPTS -->
+  <script src="js/api.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

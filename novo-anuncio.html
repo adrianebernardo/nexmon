@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novo Anúncio — Nexmon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container navbar__inner">
+      <a href="index.html" class="navbar__brand">NEX<span>MON</span></a>
+      <div class="navbar__search">
+        <input type="search" id="search" placeholder="Buscar relíquias..." autocomplete="off">
+      </div>
+      <div class="navbar__actions">
+        <a href="login.html" class="btn btn--primary" id="nav-login-btn">Entrar</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top: 32px; max-width: 800px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+      <h1 style="font-size: 1.2rem;">Forjar Novo Anúncio</h1>
+      <a href="index.html" class="btn btn--secondary" style="font-size: 0.6rem;">Cancelar</a>
+    </div>
+
+    <form id="form-anuncio" class="booking-box" style="padding: 32px;">
+      <div class="input-group" style="margin-bottom: 16px;">
+        <label for="titulo">Título da Relíquia *</label>
+        <input type="text" id="titulo" class="pixel-input" placeholder="Ex: Espada do Link em EVA" required>
+      </div>
+
+      <div class="input-group" style="margin-bottom: 16px;">
+        <label for="descricao">Descrição *</label>
+        <textarea id="descricao" class="pixel-input" rows="4" placeholder="Detalhes da arma, material, tamanho..." required style="resize: vertical;"></textarea>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div class="input-group">
+          <label for="categoria">Categoria *</label>
+          <select id="categoria" class="pixel-input" required>
+            <option value="">Selecione...</option>
+            <option value="PROPS_ARMADURAS">Props / Armaduras</option>
+            <option value="MANGAS_HQS">Mangás / HQs</option>
+            <option value="ACTION_FIGURES">Action Figures</option>
+            <option value="IMPRESSAO_3D">Impressão 3D</option>
+            <option value="ILUSTRACAO">Ilustração</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="modalidade">Modalidade *</label>
+          <select id="modalidade" class="pixel-input" required>
+            <option value="">Selecione...</option>
+            <option value="ALUGUEL">Aluguel</option>
+            <option value="VENDA">Venda</option>
+            <option value="EMPRESTIMO">Empréstimo</option>
+            <option value="SERVICO">Serviço</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div class="input-group">
+          <label for="cidade">Cidade *</label>
+          <select id="cidade" class="pixel-input" required>
+            <option value="">Selecione...</option>
+            <option value="Porto Alegre">Porto Alegre</option>
+            <option value="Canoas">Canoas</option>
+            <option value="São Leopoldo">São Leopoldo</option>
+            <option value="Novo Hamburgo">Novo Hamburgo</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="preco">Preço (R$) *</label>
+          <input type="number" id="preco" class="pixel-input" step="0.01" min="0" placeholder="0.00" required>
+        </div>
+      </div>
+
+      <div class="input-group" style="margin-bottom: 24px;">
+        <label for="fotoUrl">Link da Foto</label>
+        <input type="url" id="fotoUrl" class="pixel-input" placeholder="https://...">
+      </div>
+
+      <button type="submit" class="btn btn--primary" style="width: 100%; padding: 16px;">
+        Publicar Relíquia
+      </button>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Nexmon — Projeto acadêmico APS.</div>
+  </footer>
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <script src="js/api.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Nexmon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
+
+  <main class="booking-box" style="width: 100%; max-width: 500px; padding: 32px; text-align: center;">
+    
+    <h1 style="font-size: 1.5rem; color: var(--lilac); margin-bottom: 8px;">NEX<span style="color: var(--text);">MON</span></h1>
+    <p class="muted" style="font-family: var(--font-pixel); font-size: 0.6rem; margin-bottom: 32px;">Terminal de Acesso à Guilda</p>
+
+    <form id="form-login">
+      <div class="input-group" style="margin-bottom: 16px; text-align: left;">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" class="pixel-input" placeholder="seu@email.com" required>
+      </div>
+
+      <div class="input-group" style="margin-bottom: 24px; text-align: left;">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" class="pixel-input" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn btn--primary" style="width: 100%; padding: 16px;">
+        Entrar no Sistema
+      </button>
+    </form>
+
+    <div style="margin-top: 32px; border-top: 2px dashed var(--border); padding-top: 24px;">
+      <p class="muted" style="font-family: var(--font-pixel); font-size: 0.5rem; margin-bottom: 16px;">ACESSO RÁPIDO (TESTES)</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <button type="button" class="btn btn--secondary quick-login" data-id="1" data-nome="Lucas" style="font-size: 0.6rem;">Lucas (Cosmaker)</button>
+        <button type="button" class="btn btn--secondary quick-login" data-id="2" data-nome="Luara" style="font-size: 0.6rem;">Luara (Forge Studio)</button>
+        <button type="button" class="btn btn--secondary quick-login" data-id="3" data-nome="Adriane" style="font-size: 0.6rem;">Adriane (Admin)</button>
+      </div>
+    </div>
+
+    <a href="index.html" class="muted" style="display: block; margin-top: 24px; font-size: 1.2rem; text-decoration: underline;">Voltar para a Home</a>
+  </main>
+
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
