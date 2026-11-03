@@ -1,154 +1,286 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: http: https:; font-src 'self'; connect-src 'self' http://localhost:8080 http://127.0.0.1:8080; object-src 'none'; base-uri 'none'; form-action 'self'">
-  <meta name="referrer" content="no-referrer">
-  <meta name="description" content="Publique um item ou serviço na Guilda Nexmon.">
-  <title>Novo Anúncio — Nexmon</title>
-  <link rel="icon" type="image/svg+xml" href="../assets/img/NEXMONICON.svg?v=2">
-  <link rel="preload" href="../assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: http: https:; font-src 'self'; connect-src 'self' http://localhost:8080 http://127.0.0.1:8080; object-src 'none'; base-uri 'none'; form-action 'self'"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      name="description"
+      content="Publique um item ou serviço na Guilda Nexmon."
+    />
+    <title>Novo Anúncio — Nexmon</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../assets/img/NEXMONICON.svg?v=2"
+    />
+    <link
+      rel="preload"
+      href="../assets/fonts/press-start-2p-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../assets/fonts/vt323-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container navbar__inner">
+        <a
+          href="../index.html"
+          class="navbar__brand"
+          aria-label="Nexmon — início"
+          >NEX<span>MON</span></a
+        >
 
-  <header class="navbar">
-    <div class="container navbar__inner">
-      <a href="../index.html" class="navbar__brand" aria-label="Nexmon — início">NEX<span>MON</span></a>
+        <form
+          class="navbar__search"
+          role="search"
+          action="../index.html"
+          method="get"
+        >
+          <label for="search" class="sr-only">Buscar produtos e serviços</label>
+          <input
+            type="search"
+            id="search"
+            name="q"
+            placeholder="Buscar relíquias, armaduras..."
+            autocomplete="off"
+            maxlength="100"
+          />
+        </form>
 
-      <form class="navbar__search" role="search" action="../index.html" method="get">
-        <label for="search" class="sr-only">Buscar produtos e serviços</label>
-        <input type="search" id="search" name="q" placeholder="Buscar relíquias, armaduras..." autocomplete="off" maxlength="100">
-      </form>
-
-      <div class="navbar__actions">
-        <nav class="navbar__links" id="nav-links" aria-label="Menu do usuário" hidden></nav>
-        <a href="login.html" class="btn btn--primary" id="nav-login-btn">Entrar</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container container--narrow page">
-    <div class="page-header">
-      <h1 class="page-title">Novo Anúncio</h1>
-      <a href="../index.html" class="btn btn--secondary btn--small">Cancelar</a>
-    </div>
-
-    <form id="form-anuncio" class="booking-box form-card" novalidate>
-      <div class="input-group form-field">
-        <label for="titulo">Título *</label>
-        <input type="text" id="titulo" class="pixel-input" placeholder="Ex: Espada do Link em EVA" minlength="3" maxlength="80" required>
-      </div>
-
-      <div class="input-group form-field">
-        <label for="descricao">Descrição *</label>
-        <textarea id="descricao" class="pixel-input pixel-input--area" rows="4" placeholder="Detalhes do item, material, tamanho..." minlength="10" maxlength="1000" required></textarea>
-      </div>
-
-      <section class="image-upload form-field" aria-labelledby="fotos-titulo">
-        <div class="image-upload__heading">
-          <label id="fotos-titulo" for="fotos">Fotos do anúncio</label>
-          <span class="muted image-upload__counter" id="fotos-contador">0/5 fotos</span>
-        </div>
-        <label class="image-upload__dropzone" for="fotos">
-          <span class="image-upload__icon" aria-hidden="true">＋</span>
-          <span class="image-upload__title">Adicionar fotos</span>
-          <span class="muted">JPG, PNG ou WEBP · até 5 MB por foto</span>
-          <span class="btn btn--secondary btn--small">Selecionar arquivos</span>
-        </label>
-        <input type="file" id="fotos" class="sr-only" accept="image/jpeg,image/png,image/webp" multiple aria-describedby="fotos-ajuda">
-        <p class="muted image-upload__help" id="fotos-ajuda">Você pode selecionar até 5 imagens. Nesta etapa, elas aparecem apenas como prévia; o envio para o servidor será integrado posteriormente.</p>
-        <div class="image-preview-grid" id="fotos-preview" aria-live="polite"></div>
-      </section>
-
-      <div class="form-row">
-        <div class="input-group">
-          <label for="categoria">Categoria *</label>
-          <select id="categoria" class="pixel-input" required>
-            <option value="">Selecione...</option>
-            <option value="PROPS_ARMADURAS">Props / Armaduras</option>
-            <option value="MANGAS_HQS">Mangás / HQs</option>
-            <option value="ACTION_FIGURES">Action Figures</option>
-            <option value="IMPRESSAO_3D">Impressão 3D</option>
-            <option value="ILUSTRACAO">Ilustração</option>
-          </select>
-        </div>
-        <div class="input-group">
-          <label for="modalidade">Modalidade *</label>
-          <select id="modalidade" class="pixel-input" required>
-            <option value="">Selecione...</option>
-            <option value="aluguel">Aluguel</option>
-            <option value="venda">Venda</option>
-            <option value="emprestimo">Empréstimo</option>
-            <option value="servico">Serviço</option>
-          </select>
+        <div class="navbar__actions">
+          <nav
+            class="navbar__links"
+            id="nav-links"
+            aria-label="Menu do usuário"
+            hidden
+          ></nav>
+          <a href="login.html" class="btn btn--primary" id="nav-login-btn"
+            >Entrar</a
+          >
         </div>
       </div>
+    </header>
 
-      <div class="form-row">
-        <div class="input-group">
-          <label for="estado">Estado (UF) *</label>
-          <select id="estado" class="pixel-input" required>
-            <option value="">Selecione...</option>
-          </select>
-        </div>
-        <div class="input-group">
-          <label for="cidade">Cidade *</label>
-          <select id="cidade" class="pixel-input" required disabled>
-            <option value="">Selecione...</option>
-          </select>
-        </div>
+    <main class="container container--narrow page">
+      <div class="page-header">
+        <h1 class="page-title">Novo Anúncio</h1>
+        <a href="../index.html" class="btn btn--secondary btn--small"
+          >Cancelar</a
+        >
       </div>
 
-      <div class="form-row">
-        <div class="input-group">
-          <label for="preco">Preço (R$) — diária no aluguel e no empréstimo *</label>
-          <input type="number" id="preco" class="pixel-input" step="0.01" min="0" max="100000" inputmode="decimal" placeholder="0,00" required>
-        </div>
-      </div>
-
-      <div id="bloco-calendario" class="booking-box form-field" hidden>
-        <h3 class="booking-box__title">Regras de Locação</h3>
-        
-        <div class="form-row">
-          <div class="input-group">
-            <label for="min-dias">Mínimo de dias *</label>
-            <input type="number" id="min-dias" class="pixel-input" value="1" min="1" max="365">
-          </div>
-          <div class="input-group">
-            <label for="max-dias">Máximo de dias *</label>
-            <input type="number" id="max-dias" class="pixel-input" value="30" min="1" max="365">
-          </div>
+      <form id="form-anuncio" class="booking-box form-card" novalidate>
+        <div class="input-group form-field">
+          <label for="titulo">Título *</label>
+          <input
+            type="text"
+            id="titulo"
+            class="pixel-input"
+            placeholder="Ex: Espada do Link em EVA"
+            minlength="3"
+            maxlength="80"
+            required
+          />
         </div>
 
         <div class="input-group form-field">
-          <label for="data-bloqueio">Bloquear Datas (Indisponível)</label>
-          <div style="display: flex; gap: 8px;">
-            <input type="date" id="data-bloqueio" class="pixel-input" min="2026-01-01">
-            <button type="button" id="btn-bloquear-data" class="btn btn--secondary btn--small">Bloquear</button>
+          <label for="descricao">Descrição *</label>
+          <textarea
+            id="descricao"
+            class="pixel-input pixel-input--area"
+            rows="4"
+            placeholder="Detalhes do item, material, tamanho..."
+            minlength="10"
+            maxlength="1000"
+            required
+          ></textarea>
+        </div>
+
+        <section class="image-upload form-field" aria-labelledby="fotos-titulo">
+          <div class="image-upload__heading">
+            <label id="fotos-titulo" for="fotos">Fotos do anúncio</label>
+            <span class="muted image-upload__counter" id="fotos-contador"
+              >0/5 fotos</span
+            >
+          </div>
+          <label class="image-upload__dropzone" for="fotos">
+            <span class="image-upload__icon" aria-hidden="true">＋</span>
+            <span class="image-upload__title">Adicionar fotos</span>
+            <span class="muted">JPG, PNG ou WEBP · até 5 MB por foto</span>
+            <span class="btn btn--secondary btn--small"
+              >Selecionar arquivos</span
+            >
+          </label>
+          <input
+            type="file"
+            id="fotos"
+            class="sr-only"
+            accept="image/jpeg,image/png,image/webp"
+            multiple
+            aria-describedby="fotos-ajuda"
+          />
+          <p class="muted image-upload__help" id="fotos-ajuda">
+            Você pode selecionar até 5 imagens. Nesta etapa, elas aparecem
+            apenas como prévia; o envio para o servidor será integrado
+            posteriormente.
+          </p>
+          <div
+            class="image-preview-grid"
+            id="fotos-preview"
+            aria-live="polite"
+          ></div>
+        </section>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label for="categoria">Categoria *</label>
+            <select id="categoria" class="pixel-input" required>
+              <option value="">Selecione...</option>
+              <option value="PROPS_ARMADURAS">Props / Armaduras</option>
+              <option value="MANGAS_HQS">Mangás / HQs</option>
+              <option value="ACTION_FIGURES">Action Figures</option>
+              <option value="IMPRESSAO_3D">Impressão 3D</option>
+              <option value="ILUSTRACAO">Ilustração</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="modalidade">Modalidade *</label>
+            <select id="modalidade" class="pixel-input" required>
+              <option value="">Selecione...</option>
+              <option value="aluguel">Aluguel</option>
+              <option value="venda">Venda</option>
+              <option value="emprestimo">Empréstimo</option>
+              <option value="servico">Serviço</option>
+            </select>
           </div>
         </div>
-        
-        <div class="badges-grid" id="lista-datas-bloqueadas" style="margin-top: var(--space-2);"></div>
-        <p class="muted image-upload__help">Clique no "X" nas datas abaixo para removê-las do bloqueio.</p>
-      </div>
 
-      <button type="submit" class="btn btn--primary btn--block btn--large">Publicar Anúncio</button>
-    </form>
-  </main>
+        <div class="form-row">
+          <div class="input-group">
+            <label for="estado">Estado (UF) *</label>
+            <select id="estado" class="pixel-input" required>
+              <option value="">Selecione...</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="cidade">Cidade *</label>
+            <select id="cidade" class="pixel-input" required disabled>
+              <option value="">Selecione...</option>
+            </select>
+          </div>
+        </div>
 
-  <footer class="footer">
-    <div class="container">© 2026 Nexmon — Projeto acadêmico APS.</div>
-  </footer>
+        <div class="form-row">
+          <div class="input-group">
+            <label for="preco"
+              >Preço (R$) — diária no aluguel e no empréstimo *</label
+            >
+            <input
+              type="number"
+              id="preco"
+              class="pixel-input"
+              step="0.01"
+              min="0"
+              max="100000"
+              inputmode="decimal"
+              placeholder="0,00"
+              required
+            />
+          </div>
+        </div>
 
-  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+        <div id="bloco-calendario" class="booking-box form-field" hidden>
+          <h3 class="booking-box__title">Regras de Locação</h3>
 
-  <script src="../assets/js/utils.js" defer></script>
-  <script src="../assets/js/session.js" defer></script>
-  <script src="../assets/js/api.js" defer></script>
-  <script src="../assets/js/components.js" defer></script>
-  <script src="../assets/js/pages/novo-anuncio.js" defer></script>
-</body>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="min-dias">Mínimo de dias *</label>
+              <input
+                type="number"
+                id="min-dias"
+                class="pixel-input"
+                value="1"
+                min="1"
+                max="365"
+              />
+            </div>
+            <div class="input-group">
+              <label for="max-dias">Máximo de dias *</label>
+              <input
+                type="number"
+                id="max-dias"
+                class="pixel-input"
+                value="30"
+                min="1"
+                max="365"
+              />
+            </div>
+          </div>
+
+          <div class="input-group form-field">
+            <label for="data-bloqueio">Bloquear Datas (Indisponível)</label>
+            <div style="display: flex; gap: 8px">
+              <input
+                type="date"
+                id="data-bloqueio"
+                class="pixel-input"
+                min="2026-01-01"
+              />
+              <button
+                type="button"
+                id="btn-bloquear-data"
+                class="btn btn--secondary btn--small"
+              >
+                Bloquear
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="badges-grid"
+            id="lista-datas-bloqueadas"
+            style="margin-top: var(--space-2)"
+          ></div>
+          <p class="muted image-upload__help">
+            Clique no "X" nas datas abaixo para removê-las do bloqueio.
+          </p>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--block btn--large">
+          Publicar Anúncio
+        </button>
+      </form>
+    </main>
+
+    <footer class="footer">
+      <div class="container">© 2026 Nexmon — Projeto acadêmico APS.</div>
+    </footer>
+
+    <div
+      class="toast-container"
+      id="toast-container"
+      aria-live="polite"
+      aria-atomic="false"
+    ></div>
+
+    <script src="../assets/js/utils.js" defer></script>
+    <script src="../assets/js/session.js" defer></script>
+    <script src="../assets/js/api.js" defer></script>
+    <script src="../assets/js/components.js" defer></script>
+    <script src="../assets/js/pages/novo-anuncio.js" defer></script>
+  </body>
 </html>
