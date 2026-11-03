@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: http: https:; font-src 'self'; connect-src 'self' http://localhost:8080 http://127.0.0.1:8080; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Detalhes do anúncio na Guilda Nexmon.">
+  <title>Detalhes — Nexmon</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/NEXMONICON.svg?v=2">
+  <link rel="preload" href="../assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container navbar__inner">
+      <a href="../index.html" class="navbar__brand" aria-label="Nexmon — início">NEX<span>MON</span></a>
+
+      <form class="navbar__search" role="search" action="../index.html" method="get">
+        <label for="search" class="sr-only">Buscar produtos e serviços</label>
+        <input type="search" id="search" name="q" placeholder="Buscar relíquias, armaduras..." autocomplete="off" maxlength="100">
+      </form>
+
+      <div class="navbar__actions">
+        <nav class="navbar__links" id="nav-links" aria-label="Menu do usuário" hidden></nav>
+        <a href="login.html" class="btn btn--primary" id="nav-login-btn">Entrar</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page">
+
+    <div class="empty-page" id="detalhes-vazio" hidden>
+      <span class="is-empty">Anúncio não encontrado.</span>
+      <a href="../index.html" class="btn btn--secondary">Voltar ao catálogo</a>
+    </div>
+
+    <div id="detalhes-conteudo">
+      <nav class="breadcrumb" aria-label="Você está em">
+        <a href="../index.html">INÍCIO</a> &gt;
+        <span id="breadcrumb-categoria"></span> &gt;
+        <span class="breadcrumb__atual" id="breadcrumb-titulo"></span>
+      </nav>
+
+      <div class="details-layout">
+        <section class="details-gallery" aria-label="Foto do item">
+          <div class="gallery-main"><span id="gallery-inicial" aria-hidden="true"></span></div>
+        </section>
+
+        <section class="details-info">
+          <span class="badge badge--spaced" id="anuncio-modalidade"></span>
+          <h1 class="details-title" id="anuncio-titulo"></h1>
+
+          <div class="seller-info">
+            <div class="seller-avatar" aria-hidden="true">👤</div>
+            <div>
+              <strong class="seller-info__name" id="vendedor-nome"></strong>
+              <span class="muted seller-info__city" id="anuncio-cidade"></span>
+            </div>
+          </div>
+
+          <p class="details-desc" id="anuncio-descricao"></p>
+
+          <div class="booking-box">
+            <h3 class="booking-box__title" id="booking-titulo"></h3>
+
+            <div class="booking-dates" id="booking-datas">
+              <div class="input-group">
+                <label for="data-inicio">Data de Início</label>
+                <input type="date" id="data-inicio" class="pixel-input">
+              </div>
+              <div class="input-group">
+                <label for="data-fim">Data de Fim</label>
+                <input type="date" id="data-fim" class="pixel-input">
+              </div>
+            </div>
+
+            <div class="booking-summary">
+              <div>
+                <span class="muted booking-summary__label" id="preco-rotulo"></span>
+                <span class="pixel-price" id="preco-unitario"></span>
+              </div>
+              <div class="booking-summary__total">
+                <span class="muted booking-summary__label">Total<span id="dias-wrapper"> (<span id="dias-total">0</span> dias)</span></span>
+                <span class="pixel-price pixel-price--ok" id="valor-total">R$ 0,00</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn--primary btn--block booking-box__cta" id="btn-reservar"></button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Nexmon — Projeto acadêmico APS.</div>
+  </footer>
+
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../assets/js/utils.js" defer></script>
+  <script src="../assets/js/session.js" defer></script>
+  <script src="../assets/js/api.js" defer></script>
+  <script src="../assets/js/components.js" defer></script>
+  <script src="../assets/js/pages/detalhes.js" defer></script>
+</body>
+</html>

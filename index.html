@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: http: https:; font-src 'self'; connect-src 'self' http://localhost:8080 http://127.0.0.1:8080; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Marketplace e comunidade geek: aluguel, venda, empréstimo e serviços de props, armaduras, mangás e impressão 3D.">
+  <title>Nexmon — Marketplace Geek</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/NEXMONICON.svg?v=2">
+  <link rel="preload" href="assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container navbar__inner">
+      <a href="index.html" class="navbar__brand" aria-label="Nexmon — início">NEX<span>MON</span></a>
+
+      <form class="navbar__search" role="search" action="index.html" method="get">
+        <label for="search" class="sr-only">Buscar produtos e serviços</label>
+        <input type="search" id="search" name="q" placeholder="Buscar relíquias, armaduras..." autocomplete="off" maxlength="100">
+      </form>
+
+      <div class="navbar__actions">
+        <div class="navbar__city" style="display: flex; gap: 8px;">
+          <label for="uf-filter" class="sr-only">Filtrar por estado</label>
+          <select id="uf-filter">
+            <option value="">Estados</option>
+          </select>
+          
+          <label for="city-filter" class="sr-only">Filtrar por cidade</label>
+          <select id="city-filter" disabled>
+            <option value="">Cidades</option>
+          </select>
+        </div>
+        <nav class="navbar__links" id="nav-links" aria-label="Menu do usuário" hidden></nav>
+        <a href="pages/login.html" class="btn btn--primary" id="nav-login-btn">Entrar</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="hero" aria-label="Destaque da comunidade">
+      <div class="hero__content">
+        <span class="hero__eyebrow">⚔️ A Guilda Nexmon</span>
+        <h1>Encontre sua próxima relíquia.</h1>
+        <p class="muted">Alugue armaduras, compre colecionáveis e contrate artesãos do universo geek.</p>
+        <a href="#catalogo" class="btn btn--primary hero__cta">Explorar Catálogo</a>
+      </div>
+    </section>
+
+    <section aria-label="Filtrar por modalidade">
+      <div class="filters" id="modality-filters" role="group" aria-label="Modalidades">
+        <button type="button" class="filter-chip is-active" data-modality="" aria-pressed="true">Tudo</button>
+        <button type="button" class="filter-chip" data-modality="aluguel" aria-pressed="false">Aluguel</button>
+        <button type="button" class="filter-chip" data-modality="venda" aria-pressed="false">Venda</button>
+        <button type="button" class="filter-chip" data-modality="emprestimo" aria-pressed="false">Empréstimo</button>
+        <button type="button" class="filter-chip" data-modality="servico" aria-pressed="false">Serviço</button>
+      </div>
+    </section>
+
+    <section id="catalogo" aria-label="Catálogo de anúncios">
+      <div class="section-title">
+        <h2>Produtos em destaque</h2>
+        <span class="muted" id="results-count">Carregando…</span>
+      </div>
+      <div class="product-grid" id="product-grid" aria-live="polite"></div>
+      <nav class="pagination" id="pagination" aria-label="Paginação do catálogo"></nav>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Nexmon — Projeto acadêmico APS. Feito com 💜 pela comunidade geek.</div>
+  </footer>
+
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+  <script src="assets/js/utils.js" defer></script>
+  <script src="assets/js/session.js" defer></script>
+  <script src="assets/js/api.js" defer></script>
+  <script src="assets/js/components.js" defer></script>
+  <script src="assets/js/pages/home.js" defer></script>
+</body>
+</html>

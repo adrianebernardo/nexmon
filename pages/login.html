@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: http: https:; font-src 'self'; connect-src 'self' http://localhost:8080 http://127.0.0.1:8080; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Acesse sua conta na Guilda Nexmon.">
+  <title>Login — Nexmon</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/NEXMONICON.svg?v=2">
+  <link rel="preload" href="../assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="page-login">
+
+  <main class="login-box booking-box">
+    <h1 class="login-box__title">NEX<span>MON</span></h1>
+    <p class="login-box__subtitle muted">Terminal de Acesso à Guilda</p>
+
+    <div class="tabs" role="tablist" style="margin-bottom: var(--space-4);">
+      <button type="button" class="tabs__btn is-active" role="tab" data-tab="login" aria-selected="true">Entrar</button>
+      <button type="button" class="tabs__btn" role="tab" data-tab="cadastro" aria-selected="false">Criar Conta</button>
+    </div>
+
+    <form id="form-login">
+      <div id="campos-login">
+        <div class="input-group form-field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" class="pixel-input" placeholder="seu@email.com" autocomplete="username" maxlength="254" required>
+        </div>
+
+        <div class="input-group form-field form-field--last">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" class="pixel-input" placeholder="••••••••" autocomplete="current-password" minlength="8" maxlength="72" required>
+        </div>
+      </div>
+
+      <div id="campos-cadastro" hidden>
+        <div class="input-group form-field">
+          <label for="nome">Nome de Aventureiro *</label>
+          <input type="text" id="nome" class="pixel-input" placeholder="Seu nome" autocomplete="name" minlength="3" maxlength="60">
+        </div>
+        <div class="input-group form-field">
+          <label for="email-cadastro">E-mail *</label>
+          <input type="email" id="email-cadastro" class="pixel-input" placeholder="seu@email.com" autocomplete="email" maxlength="254">
+        </div>
+        <div class="input-group form-field">
+          <label for="senha-cadastro">Senha *</label>
+          <input type="password" id="senha-cadastro" class="pixel-input" placeholder="Mínimo 8 caracteres" autocomplete="new-password" minlength="8" maxlength="72">
+        </div>
+        <div class="input-group form-field form-field--last">
+          <label for="senha-confirmacao">Confirmar Senha *</label>
+          <input type="password" id="senha-confirmacao" class="pixel-input" placeholder="Repita a senha" autocomplete="new-password" minlength="8" maxlength="72">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn--primary btn--block btn--large" id="btn-submit">Entrar no Sistema</button>
+    </form>
+
+    <p class="login-box__notice muted" id="aviso-modo">
+      Modo demonstração: o protótipo ainda não tem servidor. Nenhuma senha é verificada ou armazenada.
+    </p>
+
+    <a href="../index.html" class="login-box__back muted">Voltar para a Home</a>
+  </main>
+
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script src="../assets/js/utils.js" defer></script>
+  <script src="../assets/js/session.js" defer></script>
+  <script src="../assets/js/api.js" defer></script>
+  <script src="../assets/js/components.js" defer></script>
+  <script src="../assets/js/pages/login.js" defer></script>
+</body>
+</html>
