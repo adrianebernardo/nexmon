@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: http: https:; font-src 'self'; connect-src 'self' http://localhost:8080 http://127.0.0.1:8080; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Acompanhe as solicitações recebidas e enviadas.">
+  <title>Solicitações — Nexmon</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/NEXMONICON.svg?v=2">
+  <link rel="preload" href="../assets/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container navbar__inner">
+      <a href="../index.html" class="navbar__brand" aria-label="Nexmon — início">NEX<span>MON</span></a>
+
+      <form class="navbar__search" role="search" action="../index.html" method="get">
+        <label for="search" class="sr-only">Buscar produtos e serviços</label>
+        <input type="search" id="search" name="q" placeholder="Buscar relíquias, armaduras..." autocomplete="off" maxlength="100">
+      </form>
+
+      <div class="navbar__actions">
+        <nav class="navbar__links" id="nav-links" aria-label="Menu do usuário" hidden></nav>
+        <a href="login.html" class="btn btn--primary" id="nav-login-btn">Entrar</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container container--medium page">
+    <h1 class="page-title">Central de Transações</h1>
+
+    <div class="tabs" role="tablist" aria-label="Tipo de solicitação">
+      <button type="button" class="tabs__btn is-active" role="tab" data-tab="recebidas" aria-selected="true">Recebidas (Anunciante)</button>
+      <button type="button" class="tabs__btn" role="tab" data-tab="enviadas" aria-selected="false">Enviadas (Solicitante)</button>
+    </div>
+
+    <div id="tab-recebidas" class="tab-content" role="tabpanel"></div>
+    <div id="tab-enviadas" class="tab-content" role="tabpanel" hidden></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Nexmon — Projeto acadêmico APS.</div>
+  </footer>
+
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../assets/js/utils.js" defer></script>
+  <script src="../assets/js/session.js" defer></script>
+  <script src="../assets/js/api.js" defer></script>
+  <script src="../assets/js/components.js" defer></script>
+  <script src="../assets/js/pages/solicitacoes.js" defer></script>
+</body>
+</html>

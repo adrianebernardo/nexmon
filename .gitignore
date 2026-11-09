@@ -1,5 +1,26 @@
+<<<<<<< HEAD
 ﻿.env
 **/.env
 target/
 **/target/
 *.class
+=======
+# Sistema e editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Dependências e builds
+node_modules/
+dist/
+
+# Segredos (nunca versionar)
+.env
+.env.*
+*.pem
+*.key
+
+# Arquivos salvos de páginas externas (ex.: export do Trello)
+*_files/
+>>>>>>> origin/main
