@@ -1,0 +1,143 @@
+# ============================================================
+# TESTES DA API NEXMON (extensão "REST Client" do VS Code)
+# Rode a API antes. Para ter dados de exemplo: perfil "h2"
+#   mvn spring-boot:run -Dspring-boot.run.profiles=h2
+# Usuários do perfil h2 (senha 12345678): ana (id 1), bruno (2), carla (3), diego (4).
+# Clique em "Send Request" acima de cada bloco. Cada "###" separa uma requisição.
+# ============================================================
+
+@api = http://localhost:8080/api
+
+### 1. Cadastrar usuário  (esperado: 201; cidade e tipoUsuario são opcionais)
+POST {{api}}/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Maria Teste",
+  "email": "maria@email.com",
+  "senha": "12345678"
+}
+
+### 2. E-mail repetido  (esperado: 409)
+POST {{api}}/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Maria Clone",
+  "email": "maria@email.com",
+  "senha": "12345678"
+}
+
+### 3. Dados inválidos  (esperado: 400 com detalhes)
+POST {{api}}/usuarios
+Content-Type: application/json
+
+{
+  "nome": "",
+  "email": "isso-nao-e-email",
+  "senha": "123"
+}
+
+### 4. Login  (esperado: 200, usuário sem a senha)
+POST {{api}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "maria@email.com",
+  "senha": "12345678"
+}
+
+### 5. Login com senha errada  (esperado: 401)
+POST {{api}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "maria@email.com",
+  "senha": "errada123"
+}
+
+### 6. Buscar usuário por id  (esperado: 200)
+GET {{api}}/usuarios/1
+
+### 7. Criar anúncio de aluguel  (esperado: 201 + selo "Primeiro Anúncio")
+POST {{api}}/anuncios
+Content-Type: application/json
+
+{
+  "titulo": "Capa de Naruto handmade",
+  "descricao": "Feita à mão, tamanho G.",
+  "preco": 120.00,
+  "modalidade": "ALUGUEL",
+  "categoria": "PROPS_ARMADURAS",
+  "estado": "RS",
+  "cidade": "Canoas",
+  "usuarioId": 1,
+  "minDias": 1,
+  "maxDias": 10,
+  "datasBloqueadas": ["2026-12-24", "2026-12-25"]
+}
+
+### 8. Listar anúncios ativos (filtros opcionais: cidade e modalidade)
+GET {{api}}/anuncios
+###
+GET {{api}}/anuncios?cidade=Canoas&modalidade=ALUGUEL
+
+### 9. Detalhes de um anúncio (inclui datasBloqueadas = dono + reservas pendentes/aprovadas)
+GET {{api}}/anuncios/1
+
+### 10. Reservar em datas livres  (esperado: 201, valorTotal = preço x dias)
+POST {{api}}/reservas
+Content-Type: application/json
+
+{
+  "anuncioId": 1,
+  "usuarioId": 3,
+  "dataInicio": "2027-01-10",
+  "dataFim": "2027-01-12"
+}
+
+### 11. Reservar em data bloqueada pelo dono  (esperado: 409)
+POST {{api}}/reservas
+Content-Type: application/json
+
+{
+  "anuncioId": 1,
+  "usuarioId": 3,
+  "dataInicio": "2026-12-24",
+  "dataFim": "2026-12-24"
+}
+
+### 12. Comprar item de VENDA (sem datas)  (esperado: 201, valorTotal = preço)
+POST {{api}}/reservas
+Content-Type: application/json
+
+{
+  "anuncioId": 3,
+  "usuarioId": 4
+}
+
+### 13. Solicitações do usuário (feitas e recebidas)
+GET {{api}}/reservas/usuario/1
+
+### 14. Dono aprova ou recusa  (esperado: 200; só o dono do anúncio, só se PENDENTE)
+PATCH {{api}}/reservas/2/status
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "status": "APROVADO"
+}
+
+### 15. Pedir orçamento de serviço  (esperado: 201)
+POST {{api}}/orcamentos
+Content-Type: application/json
+
+{
+  "anuncioId": 2,
+  "clienteId": 3,
+  "descricaoProjeto": "Ilustração do meu OC para capa de zine.",
+  "prazoDias": 15
+}
+
+### 16. Selos do usuário
+GET {{api}}/selos/usuario/1
